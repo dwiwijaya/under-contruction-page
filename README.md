@@ -2,7 +2,7 @@
 
 A minimalist, single-file **"Under Construction / Coming Soon"** page with a blueprint grid, an animated skyline, and a loading bar. Zero dependencies, no build step. Drop in `index.html` and deploy anywhere.
 
-<!-- Add a screenshot: ![Preview](screenshot.png) -->
+![Preview](screenshot.png)
 
 ## Features
 
