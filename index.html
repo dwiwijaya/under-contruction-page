@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your Project — Under Construction</title>
+<meta name="description" content="Something great is rising. Our new website is under construction — coming soon.">
+<meta name="theme-color" content="#0a0a0b">
+<meta property="og:title" content="Your Project — Something great is rising">
+<meta property="og:description" content="Our new website is under construction. Coming soon.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230a0a0b'/><path d='M22 78V30l56 40V22' fill='none' stroke='%23facc15' stroke-width='10' stroke-linejoin='round'/></svg>">
+<style>
+  :root {
+    --bg: #0a0a0b;
+    --fg: #f4f4f5;
+    --muted: #8a8a93;
+    --accent: #facc15;
+    --line: rgba(255,255,255,.08);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Blueprint grid */
+  .grid {
+    position: fixed; inset: 0; z-index: 0;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 48px 48px;
+    -webkit-mask-image: radial-gradient(ellipse at 50% 40%, #000 20%, transparent 75%);
+            mask-image: radial-gradient(ellipse at 50% 40%, #000 20%, transparent 75%);
+    opacity: .7;
+  }
+  .glow {
+    position: fixed; inset: 0; z-index: 1; pointer-events: none;
+    background: radial-gradient(520px circle at var(--mx, 50%) var(--my, 35%), rgba(250,204,21,.08), transparent 60%);
+  }
+
+  /* Skyline */
+  .city {
+    position: fixed; left: 0; right: 0; bottom: 6px; z-index: 1;
+    height: 36vh; max-height: 340px;
+    display: flex; align-items: flex-end; justify-content: center;
+    gap: 6px; overflow: hidden;
+    border-bottom: 1px solid rgba(255,255,255,.18);
+    -webkit-mask-image: linear-gradient(to top, #000 45%, transparent 100%);
+            mask-image: linear-gradient(to top, #000 45%, transparent 100%);
+  }
+  .b {
+    flex: 0 0 auto;
+    width: var(--w); height: 0;
+    border: 1px solid rgba(255,255,255,.16);
+    border-bottom: none;
+    background-color: rgba(255,255,255,.02);
+    background-image: radial-gradient(circle, rgba(250,204,21,.38) 1px, transparent 1.6px);
+    background-size: 11px 13px;
+    background-position: 4px 6px;
+    animation: grow 1.6s cubic-bezier(.2,.8,.2,1) forwards;
+    animation-delay: var(--d);
+  }
+  .b.plain { background-image: none; }
+  .b.wip {
+    border: 1px dashed var(--accent);
+    border-bottom: none;
+    background-image: repeating-linear-gradient(-45deg, rgba(250,204,21,.10) 0 6px, transparent 6px 12px);
+    animation: grow 1.6s cubic-bezier(.2,.8,.2,1) forwards, build 4.5s ease-in-out 2.4s infinite alternate;
+    animation-delay: var(--d), 0s;
+    position: relative;
+  }
+  .b.wip::before { /* crane tip marker */
+    content: ""; position: absolute; top: -9px; left: 50%;
+    width: 1px; height: 9px; background: var(--accent);
+  }
+  @keyframes grow { to { height: var(--h); } }
+  @keyframes build { from { height: var(--h); } to { height: calc(var(--h) + 26px); } }
+
+  /* Hazard stripe */
+  .hazard {
+    position: fixed; left: 0; right: 0; bottom: 0; height: 6px; z-index: 2;
+    background: repeating-linear-gradient(-45deg, var(--accent) 0 12px, #0a0a0b 12px 24px);
+    opacity: .9;
+  }
+
+  main {
+    position: relative; z-index: 2;
+    min-height: 100%;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 24px 24px 22vh;
+    gap: 26px;
+  }
+  .pill {
+    display: inline-flex; align-items: center; gap: 10px;
+    font: 12px ui-monospace, SFMono-Regular, Menlo, monospace;
+    letter-spacing: .14em; text-transform: uppercase;
+    color: var(--muted);
+    border: 1px solid var(--line);
+    padding: 8px 14px; border-radius: 999px;
+    backdrop-filter: blur(8px);
+    background: rgba(255,255,255,.02);
+    opacity: 0; animation: rise .9s .1s forwards;
+  }
+  .dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--accent);
+    animation: pulse 2s infinite;
+  }
+  h1 {
+    font-size: clamp(2.5rem, 8.5vw, 5.6rem);
+    font-weight: 700;
+    letter-spacing: -.045em;
+    line-height: 1.02;
+    max-width: 14ch;
+    opacity: 0; animation: rise .9s .25s forwards;
+  }
+  h1 em {
+    font-style: normal;
+    background: linear-gradient(120deg, #fff6c2 0%, var(--accent) 60%, #f59e0b 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .lead {
+    font-size: clamp(1rem, 2.3vw, 1.2rem);
+    color: var(--muted);
+    max-width: 44ch;
+    line-height: 1.65;
+    opacity: 0; animation: rise .9s .4s forwards;
+  }
+  .lead b { color: var(--fg); font-weight: 500; }
+  .typed-wrap {
+    font: 13px ui-monospace, Menlo, monospace;
+    letter-spacing: .08em;
+    color: var(--accent);
+    min-height: 1.4em;
+    opacity: 0; animation: rise .9s .5s forwards;
+  }
+  .cursor { display: inline-block; width: 7px; height: 1em; background: var(--accent); margin-left: 4px; vertical-align: -.15em; animation: blink 1s steps(1) infinite; }
+
+  .progress { width: min(300px, 72vw); opacity: 0; animation: rise .9s .65s forwards; }
+  .bar { height: 3px; background: var(--line); border-radius: 3px; overflow: hidden; position: relative; }
+  .bar i {
+    position: absolute; top: 0; bottom: 0; left: 0; width: 40%;
+    background: repeating-linear-gradient(-45deg, var(--accent) 0 8px, #b8940a 8px 16px);
+    border-radius: 3px;
+    animation: load 1.8s cubic-bezier(.65,0,.35,1) infinite;
+  }
+  @keyframes load {
+    0%   { transform: translateX(-100%); }
+    100% { transform: translateX(250%); }
+  }
+  .meta {
+    display: flex; justify-content: space-between;
+    margin-top: 10px;
+    font: 11px ui-monospace, Menlo, monospace;
+    color: var(--muted); letter-spacing: .1em;
+  }
+
+  footer {
+    position: fixed; bottom: 20px; left: 0; right: 0; z-index: 3;
+    text-align: center;
+    font: 11px ui-monospace, Menlo, monospace;
+    color: #6a6a73; letter-spacing: .12em;
+  }
+
+  @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  @keyframes blink { 50% { opacity: 0; } }
+  @keyframes pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(250,204,21,.55); }
+    70%  { box-shadow: 0 0 0 9px rgba(250,204,21,0); }
+    100% { box-shadow: 0 0 0 0 rgba(250,204,21,0); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before { animation-duration: .01s !important; animation-delay: 0s !important; animation-iteration-count: 1 !important; }
+  }
+</style>
+</head>
+<body>
+  <div class="grid" aria-hidden="true"></div>
+  <div class="glow" aria-hidden="true"></div>
+  <div class="city" id="city" aria-hidden="true"></div>
+  <div class="hazard" aria-hidden="true"></div>
+
+  <main>
+    <div class="pill"><span class="dot"></span> Under Construction · Coming Soon</div>
+    <h1>Something great is <em>rising.</em></h1>
+    <p class="lead">
+      Our new website is being built the way we build everything —
+      <b>carefully, solidly, and on schedule.</b>
+    </p>
+    <div class="typed-wrap"><span id="typed"></span><span class="cursor"></span></div>
+    <div class="progress" role="status" aria-label="Loading">
+      <div class="bar"><i></i></div>
+      <div class="meta"><span>BUILDING</span><span>PLEASE STAND BY</span></div>
+    </div>
+  </main>
+
+  <footer>© <span id="year"></span> YOUR PROJECT</footer>
+
+<script>
+(() => {
+  // ---------- Skyline ----------
+  const city = document.getElementById("city");
+  const COUNT = 26;
+  // stable pseudo-random so layout looks the same every load
+  let seed = 7;
+  const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  const wipIdx = new Set([8, 17]);
+  for (let i = 0; i < COUNT; i++) {
+    const b = document.createElement("div");
+    const w = 26 + Math.round(rnd() * 44);
+    const h = 22 + Math.round(rnd() * 62);
+    b.className = "b" + (wipIdx.has(i) ? " wip" : rnd() > .75 ? " plain" : "");
+    b.style.setProperty("--w", w + "px");
+    b.style.setProperty("--h", (wipIdx.has(i) ? Math.min(h, 55) : h) + "%");
+    b.style.setProperty("--d", (500 + i * 70) + "ms");
+    city.appendChild(b);
+  }
+
+  // ---------- Typed phrases ----------
+  const phrases = ["Built with precision.", "Built to last.", "Built for you."];
+  const el = document.getElementById("typed");
+  let p = 0, c = 0, del = false;
+  (function tick() {
+    const s = phrases[p];
+    el.textContent = s.slice(0, c);
+    if (!del && c === s.length) { del = true; return setTimeout(tick, 1700); }
+    if (del && c === 0) { del = false; p = (p + 1) % phrases.length; return setTimeout(tick, 300); }
+    c += del ? -1 : 1;
+    setTimeout(tick, del ? 35 : 75);
+  })();
+
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  // ---------- Cursor glow ----------
+  addEventListener("pointermove", e => {
+    const s = document.documentElement.style;
+    s.setProperty("--mx", e.clientX + "px");
+    s.setProperty("--my", e.clientY + "px");
+  });
+})();
+</script>
+</body>
+</html>
